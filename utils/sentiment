@@ -1,0 +1,2 @@
+45,50,55 17 * * 1-5 cd /data/project/2025 && git pull
+40,55,50 14,17 * * 1 cd /data/project/2025/utils && python weekly_file.py
