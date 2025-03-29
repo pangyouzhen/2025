@@ -21,7 +21,7 @@ def main():
     # 读取 Excel 文件
     try:
         df = pd.read_excel(excel_file)
-        assert all(df['类别'].duplicated()) == False
+        assert any(df['类别'].duplicated()) == False
         # 将数据保存为 CSV 文件
         csv_file = f'../sentiment/weekly/{filename}.csv'
         df.to_csv(csv_file, index=False)
