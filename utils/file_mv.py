@@ -21,7 +21,11 @@ def main():
     # 读取 Excel 文件
     try:
         df = pd.read_excel(excel_file)
-        assert any(df['类别'].duplicated()) == False
+        if any(df['类别'].duplicated()) == True:
+            duplicate_categories = df[df['类别'].duplicated(keep=False)]['类别'].unique()
+            print("重复的类别有:", duplicate_categories)
+            raise ValueError("duplcated")
+        
         # 将数据保存为 CSV 文件
         csv_file = f'../sentiment/weekly/{filename}.csv'
         df.to_csv(csv_file, index=False)
