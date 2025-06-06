@@ -126,4 +126,5 @@ dmypy.json
 .history
 workday_data/*
 !workday_data/.gitkeep
-
+utils/code.txt
+utils/code2.sel
