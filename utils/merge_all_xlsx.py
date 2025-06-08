@@ -2,6 +2,8 @@ from pathlib import Path
 
 import natsort  # 用于自然排序
 import pandas as pd
+from pypinyin import (  # Import pinyin and Style for Chinese character to pinyin conversion
+    Style, pinyin)
 
 p = Path('../sentiment/weekly/')
 
@@ -26,6 +28,25 @@ if dfs:
     merged_df = dfs[0]
     for i in range(1, len(dfs)):
         merged_df = pd.merge(merged_df, dfs[i], how='outer', on='类别')
+    
+ # --- Sort the '类别' index by pinyin ---
+    # The 'TypeError: sequence item 0: expected str instance, list found'
+    # happened because `pinyin(str(x))` returns a list of lists (e.g., [['li'], ['ming']]).
+    # We need to flatten this list of lists into a single string for sorting.
+    # The `sum([], [])` trick effectively flattens a list of lists.
+
+    # Ensure the index is string type before attempting pinyin conversion
+    merged_df.index = merged_df.index.astype(str)
+
+    # Sort the index directly using the pinyin conversion as the key
+    sorted_index = sorted(
+        merged_df.index,
+        key=lambda x: ''.join(sum(pinyin(x, style=Style.NORMAL), []))
+    )
+
+    # Reindex the DataFrame with the sorted index
+    merged_df = merged_df.reindex(sorted_index)
+    # ----------------------------------------
 
     # 保存合并结果
     merged_df.to_excel('../workday_data/merge_all.xlsx')
