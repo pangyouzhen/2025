@@ -1,6 +1,5 @@
 from collections import Counter
 from pathlib import Path
-
 import pandas as pd
 
 p = Path("../sentiment/strong/")
@@ -17,4 +16,6 @@ for i in csvs[-k:]:
 
 all_df = pd.concat(dfs)
 c = Counter(all_df["名称"].tolist())
-print(c.most_common(20))
+
+res = pd.DataFrame(c.most_common(30),columns=['name','num'])
+res.to_csv("strong.txt",index=False)
