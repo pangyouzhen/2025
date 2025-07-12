@@ -50,6 +50,8 @@ if dfs:
 
     # 保存合并结果
     merged_df.to_excel('../workday_data/merge_all.xlsx')
+    merged_df.to_csv('../workday_data/merge_all.csv')
+
     print("Merged file saved as 'merge_all.xlsx'")
 else:
     print("No valid Excel files found to merge.")
