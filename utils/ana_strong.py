@@ -1,5 +1,6 @@
 from collections import Counter
 from pathlib import Path
+
 import pandas as pd
 import typer
 
@@ -9,13 +10,17 @@ csvs.sort()
 # print(csvs)
 
 app = typer.Typer()
-
+  
 @app.command()
 def get_strong(k:int=30):
     # K 数量
     dfs = []
+    bankuai = []
     for i in csvs[-k:]:
         df = pd.read_csv(i.absolute())
+        df = df[df["入选理由"]!="近期多次涨停"]
+        # 过滤科创板股票
+        # df = df[df[]]
         dfs.append(df)
 
     all_df = pd.concat(dfs)
