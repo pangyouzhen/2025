@@ -49,6 +49,9 @@ if dfs:
     # ----------------------------------------
 
     # 保存合并结果
+    print('\n')
+    print(list(merged_df.index))
+    print('\n')
     merged_df.to_excel('../workday_data/merge_all.xlsx')
     merged_df.to_csv('../workday_data/merge_all.csv')
 

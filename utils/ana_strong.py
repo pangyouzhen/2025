@@ -20,7 +20,8 @@ def get_strong(k:int=30):
         df = pd.read_csv(i.absolute())
         df = df[df["入选理由"]!="近期多次涨停"]
         # 过滤科创板股票
-        # df = df[df[]]
+        df["代码"] = df["代码"].astype(str)
+        df = df[~df["代码"].str.startswith('688')]
         dfs.append(df)
 
     all_df = pd.concat(dfs)
