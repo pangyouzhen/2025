@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 from pathlib import Path
 
@@ -6,7 +7,7 @@ import pandas as pd
 parser = argparse.ArgumentParser(
     description="在指定目录下所有 CSV 文件中搜索关键字，并打印包含该关键字的行及匹配列。"
 )
-parser.add_argument("--keyword", type=str, required=True, help="要搜索的关键字（支持子字符串匹配）。")
+parser.add_argument("keyword", type=str, required=True, help="要搜索的关键字（支持子字符串匹配）。")
 parser.add_argument("--show-cols-only", action="store_true", help="仅打印匹配列及其值，不显示整行数据。")
 args = parser.parse_args()
 
